@@ -1,3 +1,3 @@
 # photoCollage.js
 
-Initial release is limited.  Need to add display options and make collage responisve
+Initial release is limited.  Need to add display options and make collage responsive
