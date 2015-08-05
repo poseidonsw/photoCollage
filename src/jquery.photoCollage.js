@@ -25,7 +25,6 @@
       var len = $(".collage a").length;
   		for (var row = 0; row <= len/3; row++) {
   			for(var col = 0; col <= len/2; col++ ){
-  				//if (i == 4) { row = 1; offset = 15; y = 1;}
   				if (rot_index == rot.length) { rot_index =0;}
   				$(".collage a:nth-child("+(i++)+")").css({
   		        "transform":"rotate("+rot[rot_index]+"deg)",
