@@ -26,7 +26,6 @@
       $(this).addClass("collage");
       var offset_top = $(window).height()/8;
       var offset_left = $(window).width()/120;
-      console.log(offset_top);
       var temp = $(window).width()
       var max_size = $(".collage a").css("max-width");
       var len = $(".collage a").length;
@@ -55,10 +54,8 @@
       var max = 220;
       var screen_width = $(window).width();
       var collage_width = $(".collage").width();
-      console.log(screen_width+" "+collage_width);
       for (i = 0; i < len; i++) {
         if ( collage_width/3 < max) {
-          console.log($(".collage a img:nth-child("+(i)+")").css('width'));
           $(".collage a").css('max-width', (collage_width/3+20)+"px");
           $(".collage a img").css('max-width', collage_width/3+"px");
         }
@@ -114,8 +111,6 @@
           if ( collage_width/3 < max) {
             $(".collage a").css('max-width', (collage_width/3+20)+"px");
             $(".collage a img").css('max-width', collage_width/3+"px");
-            console.log("hello"+$(".collage a").height());
-            /*$(".collage a").css('margin-top', ((i/3)*125)+"px");*/
           }
           if (screen_width == collage_width && first) {
             first = false;
@@ -143,7 +138,6 @@
         var collage_width = $(".collage").width();
         for (i = 0; i < len; i++) {
           if ( collage_width/3 < max) {
-            console.log($(".collage a img:nth-child("+(i)+")").css('width'));
             $(".collage a").css('max-width', (collage_width/3+20)+"px");
             $(".collage a img").css('max-width', collage_width/3+"px");
           }
