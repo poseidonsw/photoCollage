@@ -16,15 +16,25 @@
 
     $.fn.photoCollage = function (custom) {
 
-  		var offset = 30;
+
+      var offset = 20;
   		var i = 1;
-  		var rot = [-7,7,-15,-15,7,-7];
+  		var rot = [-7,7,-15,15,7,-7];
   		var rot_index = 0;
 
+
       $(this).addClass("collage");
+      var offset_top = $(window).height()/8;
+      var offset_left = $(window).width()/120;
+      console.log(offset_top);
+      var temp = $(window).width()
+      var max_size = $(".collage a").css("max-width");
       var len = $(".collage a").length;
-  		for (var row = 0; row <= len/3; row++) {
-  			for(var col = 0; col <= len/2; col++ ){
+      var cols = 3;
+      var rows = len/cols;
+
+  		for (var row = 0; row < rows; row++) {
+  			for(var col = 0; col < cols; col++ ){
   				if (rot_index == rot.length) { rot_index =0;}
   				$(".collage a:nth-child("+(i++)+")").css({
   		        "transform":"rotate("+rot[rot_index]+"deg)",
@@ -32,12 +42,27 @@
   		        "-moz-transform":"rotate("+rot[rot_index]+"deg)",
   		        "-webkit-transform":"rotate("+rot[rot_index]+"deg)",
   		        "-o-transform":"rotate("+rot[rot_index]+"deg)",
-  		        "margin-left": offset*(col)+(15*row)+"%",
-  						"margin-top": (row*125)+"px"
+  		        "margin-left": offset*(col)+"%",
+  						"margin-top": offset_top+(row*115)+"px"
   				});
   		  	rot_index++;
   			}
+
   	  }
+
+      var len = $(".collage a").length;
+      var i;
+      var max = 220;
+      var screen_width = $(window).width();
+      var collage_width = $(".collage").width();
+      console.log(screen_width+" "+collage_width);
+      for (i = 0; i < len; i++) {
+        if ( collage_width/3 < max) {
+          console.log($(".collage a img:nth-child("+(i)+")").css('width'));
+          $(".collage a").css('max-width', (collage_width/3+20)+"px");
+          $(".collage a img").css('max-width', collage_width/3+"px");
+        }
+      }
 
   		var n;
   		var z;
@@ -76,5 +101,59 @@
   				});
   			}
       );
+      var first = true;
+
+      $(window).resize(function(){
+        var len = $(".collage a").length;
+        var i;
+        var max = 220;
+        var screen_width = $(window).width();
+        var collage_width = $(".collage").width();
+
+        for (i = 0; i < len; i++) {
+          if ( collage_width/3 < max) {
+            $(".collage a").css('max-width', (collage_width/3+20)+"px");
+            $(".collage a img").css('max-width', collage_width/3+"px");
+            console.log("hello"+$(".collage a").height());
+            /*$(".collage a").css('margin-top', ((i/3)*125)+"px");*/
+          }
+          if (screen_width == collage_width && first) {
+            first = false;
+            $(".collage a").css('max-width', (max+20)+"px");
+            $(".collage a img").css('max-width', max+"px");
+
+
+          } else {
+            first = true;
+          }
+        }
+        var col_size = offset*(3)+$(".collage a").width();
+        var paddingLeft = screen_width - col_size;
+        if (screen_width > 768 ) {
+          paddingLeft = paddingLeft - 330;
+        }
+        $(".collage").css('padding-left', paddingLeft/4+"px")
+      });
+
+      $(window).load(function(){
+        var len = $(".collage a").length;
+        var i;
+        var max = 220;
+        var screen_width = $(window).width();
+        var collage_width = $(".collage").width();
+        for (i = 0; i < len; i++) {
+          if ( collage_width/3 < max) {
+            console.log($(".collage a img:nth-child("+(i)+")").css('width'));
+            $(".collage a").css('max-width', (collage_width/3+20)+"px");
+            $(".collage a img").css('max-width', collage_width/3+"px");
+          }
+        }
+        var col_size = offset*(3)+$(".collage a").width();
+        var paddingLeft = screen_width - col_size;
+        if (screen_width > 768 ) {
+          paddingLeft = paddingLeft - 330;
+        }
+        $(".collage").css('padding-left', paddingLeft/4+"px")
+      });
     };
 })(jQuery, document, window);
